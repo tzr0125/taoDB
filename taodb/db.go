@@ -43,18 +43,31 @@ func (db *DB) Close() error {
 }
 
 // 写入
-func (db *DB) Put(key []byte, value []byte) error {
-	return nil
+func (db *DB) Put(key string, value string) error {
+	trans := NewTransaction()
+	err := trans.Put(key, value)
+	if err != nil{
+		trans.Rollback()
+		return err
+	}
+	err = trans.Commit()
+	return err
 }
 
 
-func (db *DB) Get(key []byte) ([]byte, error) {
-
-	return nil, nil
+func (db *DB) Get(key string) (string, error) {
+	trans := NewTransaction()
+	val, err := trans.Get(key)
+	if err!= nil{
+        return "", err
+    }
+	return val, nil
 }
 
 
 func (db *DB) Delete(key []byte) error {
+	trans := NewTransaction()
+	
 	return nil
 }
 
