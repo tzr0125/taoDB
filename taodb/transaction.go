@@ -6,7 +6,7 @@ package taodb
 type Transaction struct {
 	id uint32 // 事务id
 	db *DB
-	index TempIndex // 
+	index TempIndex // 临时哈希表，当提交时，哈希表并入
 
 }
 
@@ -23,6 +23,7 @@ func NewTransaction() *Transaction {
 // 以下未完成
 
 func (transaction *Transaction) Put(key, value string) error {
+	// 
 	return nil
 }
 
@@ -44,4 +45,8 @@ func (transaction *Transaction) Commit() error {
 
 func (transaction *Transaction) Rollback() error {
 	return nil
+}
+
+func (transaction *Transaction) Close() error {
+	
 }

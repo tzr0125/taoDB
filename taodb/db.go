@@ -65,13 +65,13 @@ func (db *DB) Get(key string) (string, error) {
 }
 
 
-func (db *DB) Delete(key []byte) error {
+func (db *DB) Delete(key string) error {
 	trans := NewTransaction()
-	
-	return nil
+	return trans.Delete(key)
 }
 
 
-func (db *DB) Exist(key []byte) (bool, error) {
-	return false, nil
+func (db *DB) Exist(key string) (bool, error) {
+	trans := NewTransaction()
+	return trans.Exist(key)
 }
